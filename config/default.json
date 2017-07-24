@@ -1,0 +1,25 @@
+{
+  "thz": {
+    "host": "192.168.1.100",
+    "port": "80",
+    "username": "thz",
+    "password": "thz"
+  },
+  "modules": {
+    "system": "/?s=1,0",
+    "heatpump": "/?s=1,1"
+  },
+  "database": {
+    "path": "thz_data.sqlite3"
+  },
+  "httpServer": {
+    "username": "lox2thz",
+    "password": "lox2thz",
+    "port": "8080"
+  },
+  "dataCollector": {
+    "interval": "300"
+  }
+}
+
+// vim: ts=2 sw=2 sts=2 et
