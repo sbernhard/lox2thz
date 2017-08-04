@@ -23,8 +23,8 @@ nodejs lox2thz.js
 ## HTTP Server
 nodejs will start a HTTP server running on 8080 (per default)
 For receiving data, start a browser and access
- - http://<ip>/heatpumps
- - http://<ip>/systems
+ - http://[ip-address]/heatpumps
+ - http://[ip-address]/systems
 
 ## Loxone connection
 The result data is like the following which can be easily parsed by Loxone
@@ -35,8 +35,15 @@ The result data is like the following which can be easily parsed by Loxone
 
 ## USE AT YOUR OWN RISK
 
-Copyright by Bernhard Suttner 
-GPL License
+# Copyright
+
+Copyright(c) 2017 Bernhard Suttner 
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 
 
 
