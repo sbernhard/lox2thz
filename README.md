@@ -37,7 +37,7 @@ The result data is like the following which can be easily parsed by Loxone
 
 # Copyright
 
-Copyright(c) 2017 Bernhard Suttner 
+Copyright(c) 2017 Bernhard Suttner / http://www.bernhard-suttner.de
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
