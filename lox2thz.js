@@ -3,13 +3,15 @@ const express = require('express');
 const basicAuth = require('basic-auth-connect');
 const config = require('config');
 const Sequelize = require('sequelize');
+const validator = require('validator');
 const qs = require('qs');
 const util = require('util');
-const cookie = require('cookie');
 const models = require('./models');
 const hpC = require('./controllers/heatpump_controller.js');
 const systemC = require('./controllers/system_controller.js');
 const httpDataCollector = require('./httpDataCollector.js');
+const httpDataWriter = require('./httpDataWriter.js');
+const loxmap = require('./loxmap.js');
 
 // initialize the app
 const app = express();
@@ -39,19 +41,19 @@ var authOptions = {
 
 // construct httpDataCollector for heatpumps data
 var collectorHeatpumps = new httpDataCollector(
-    config.get('thz.host'), 
-    config.get('thz.port'), 
-    config.get('modules.heatpump'), 
-    config.get('thz.username'), 
+    config.get('thz.host'),
+    config.get('thz.port'),
+    config.get('modules.heatpump'),
+    config.get('thz.username'),
     config.get('thz.password')
     );
 
 // construct httpDataCollector for system data
 var collectorSystems = new httpDataCollector(
-    config.get('thz.host'), 
-    config.get('thz.port'), 
-    config.get('modules.system'), 
-    config.get('thz.username'), 
+    config.get('thz.host'),
+    config.get('thz.port'),
+    config.get('modules.system'),
+    config.get('thz.username'),
     config.get('thz.password')
     );
 
@@ -63,40 +65,45 @@ function collect_data(collector, controller, model, cookie) {
   });
 }
 
-// collect the System data
-setInterval(function() { 
-  var System = models.System;
-  var Heatpump = models.Heatpump;
-
+// send auth request
+function auth(resp_callback) {
   console.log("Sending auth request for "+ config.get('thz.username') + " to "+ config.get('thz.host'));
-  var request = http.request(authOptions, function(response) {
-    var cookie = response.headers['set-cookie'];
-    var html_response = '';
-
-    response.setEncoding('utf8');
-    response.on('data', function (chunk) {
-      html_response = html_response + chunk;
-    }); 
-
-    response.on('end', function () {
-      //console.log(html_response);
-    }); 
-
-    //console.log("Cookie is "+ cookie);
-    collect_data(collectorSystems, systemC, System, cookie);
-    collect_data(collectorHeatpumps, hpC, Heatpump, cookie);
-  });
+  var request = http.request(authOptions, resp_callback);
 
   // Error handling (e.g. host not reachable)
   request.on('error', function(e) {
     console.log('problem with request: ' + e.message);
-  }); 
+  });
 
   // write the authData
   request.write(authData);
 
   // (s)end the request
   request.end();
+}
+
+// collect the System data
+setInterval(function() {
+  var System = models.System;
+  var Heatpump = models.Heatpump;
+
+  var request = auth(function(response) {
+    var cookie = response.headers['set-cookie'];
+    var html_response = '';
+
+    response.setEncoding('utf8');
+    response.on('data', function (chunk) {
+      html_response = html_response + chunk;
+    });
+
+    response.on('end', function () {
+      //console.log(html_response);
+    });
+
+    //console.log("Cookie is "+ cookie);
+    collect_data(collectorSystems, systemC, System, cookie);
+    collect_data(collectorHeatpumps, hpC, Heatpump, cookie);
+  });
 }, config.get('dataCollector.interval')*1000);
 
 
@@ -150,7 +157,7 @@ app.get('/heatpumps', function(request, response) {
     data += generate_output_line(entries[0], "elektr_ne_heizen");
 
     response.send(data)
-  }); 
+  });
 });
 
 // handle the /systems request
@@ -193,10 +200,95 @@ app.get('/systems', function(request, response) {
     data += generate_output_line(entries[0], "heizstufe");
 
     response.send(data)
-  }); 
+  });
 });
 
-// HTTP listen 
+// validate a loxmap entries if value is allowed
+function validate_value(entry, value) {
+  var result = false;
+
+  if (entry !== undefined) {
+
+    switch (entry['type']) {
+      case 'int':
+        result = validator.isInt(value, { min: entry['min'], max: entry['max'] })
+          break;
+
+      case 'double':
+        result = validator.isFloat(value.replace(',','.'), { min: entry['min'], max: entry['max'] })
+          break;
+
+      case 'selection':
+        result = value in entry['selection'];
+        break;
+    }
+  }
+
+  return result;
+}
+
+// handle the /set requests
+app.get('/set', function(request, response) {
+  var section = request.query.section;
+  var id = request.query.id;
+  var value = request.query.value;
+
+  if (value !== undefined && value != "") {
+    console.log("section is: "+ section + " id is: "+ id + " value is: "+ value);
+
+    var entry = loxmap[section][id];
+    if (entry !== undefined) {
+
+      if (validate_value(entry, value)) {
+        console.log("Yes "+ value +" is valid for "+ section + "/"+ id);
+
+        var dataWriter = new httpDataWriter(
+            config.get('thz.host'),
+            config.get('thz.port'),
+            config.get('thz.username'),
+            config.get('thz.password')
+            );
+
+        var request = auth(function(auth_response) {
+          var cookie = auth_response.headers['set-cookie'];
+          var html_response = '';
+
+          auth_response.setEncoding('utf8');
+          auth_response.on('data', function (chunk) {
+            html_response = html_response + chunk;
+          });
+
+          auth_response.on('end', function () {
+            //console.log(html_response);
+          });
+
+          //console.log("Cookie is "+ cookie);
+
+          dataWriter.setValue(cookie, entry['key'], value, function(html_data) {
+            console.log("Saving key "+ section + "/" + id + " ("+ entry['key'] + ") with value "+ value + " was "+ html_data);
+
+            // parse return value to JSON obj
+            html_obj = JSON.parse(html_data);
+
+            if (html_obj.success === true) {
+              response.send("success");
+            } else {
+              response.send("failed");
+            }
+          });
+        });
+      } else {
+        response.send("NOPE! "+ value +" is NOT valid for "+ section + "/"+ id);
+      }
+    } else {
+      response.send("NOPE! "+ section + "/"+ id + " was not defined yet!");
+    }
+  } else {
+    response.send("NOPE! Value must be set for "+ section + "/"+ id);
+  }
+});
+
+// HTTP listen
 http.createServer(app).listen(config.get('httpServer.port'), '0.0.0.0');
 
-// vim: ts=2 sw=2 sts=2 et    
+// vim: ts=2 sw=2 sts=2 et
