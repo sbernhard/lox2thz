@@ -33,6 +33,13 @@ The result data is like the following which can be easily parsed by Loxone
   hochdruck:"16.03" 
 ```
 
+## Save values to THZ / LWZ
+The following will change the ventilation to stage 2:
+
+http://[ip-address]/set/?section=lueftungsstufen&id=stufe_tag&value=2
+
+For a complete list of currently available keys, have a look at loxmap.js
+
 ## USE AT YOUR OWN RISK
 
 # Copyright
