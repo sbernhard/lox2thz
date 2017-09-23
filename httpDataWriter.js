@@ -2,29 +2,37 @@
 
 const http = require('http');
 
-class httpDataCollector {
+class httpDataWriter {
 
-  constructor(hostname, port, path, username, password) {
+  constructor(hostname, port, username, password) {
     this.hostname = hostname;
     this.port = port;
-    this.path = path;
+    this.path = "/save.php";
     this.username = username;
     this.password = password;
   }
 
-  collect(cookie, resp_callback) {
+  setValue(cookie, key, value, resp_callback) {
     var html_response = '';
     var agent = new http.Agent();
+
+		var thz_option = [{
+			"name":  key,
+			"value": value
+		}]
+
+		var post_data = 'data='+ JSON.stringify(thz_option);
 
     var options = {
       hostname: this.hostname,
       port: this.port,
       path: this.path,
-      method: 'GET',
+      method: 'POST',
       agent: agent,
       headers: {
         'Cookie': cookie,
-        'Connection': 'keep-alive'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(post_data)
       }
     };
 
@@ -46,6 +54,9 @@ class httpDataCollector {
       console.log('problem with request: ' + e.message);
     });
 
+		//Write our post data to the request
+		request.write(post_data);
+
     // (s)end the request
     request.end();
 
@@ -56,6 +67,6 @@ class httpDataCollector {
   }
 };
 
-module.exports = httpDataCollector;
+module.exports = httpDataWriter;
 
 // vim: ts=2 sw=2 sts=2 et

@@ -1,6 +1,6 @@
 {
   "name": "lox2thz",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provide a interface for loxone and save values with ISG Web to THZ / LWZ",
   "main": "lox2thz.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "express": "^4.15.3",
     "http-agent": "^0.1.2",
     "sequelize": "^4.4.2",
-    "sqlite": "^2.8.0"
+    "sqlite": "^2.8.0",
+    "validator": "^8.2.0"
   }
 }
