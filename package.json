@@ -1,6 +1,6 @@
 {
   "name": "lox2thz",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Interface for ISG Web to read / save values in Tecalor THZ / Stiebel Eltron LWZ. Mainly used in Loxone!",
   "main": "lox2thz.js",
   "scripts": {
@@ -14,6 +14,10 @@
     "lwz"
   ],
   "author": "Bernhard Suttner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sbernhard/lox2thz.git"
+  },
   "license": "GPL-2.0",
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
@@ -23,6 +27,7 @@
     "http-agent": "^0.1.2",
     "sequelize": "^4.4.2",
     "sqlite": "^2.8.0",
-    "validator": "^8.2.0"
+    "sqlite3": "^3.1.13",
+    "validator": "^9.0.0"
   }
 }
