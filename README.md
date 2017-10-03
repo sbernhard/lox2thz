@@ -6,6 +6,7 @@
 - nodejs
 - Tecalor ISG-Web
 - Tecalor 304 SOL (works maybe on Stiebel Eltron 304 SOL and similar)
+- *Important*: The language of your ISB-Web must be set to German (Deutsch) as lox2thz does parse the ISG-Web HTML document.
 
 ## Installation
 ```sh
@@ -19,6 +20,9 @@ Have a look at config/default.json
 ```sh
 nodejs lox2thz.js
 ```
+
+Have a look at "pm2" for starting / stopping lox2thz. See:
+http://pm2.keymetrics.io/
 
 ## HTTP Server
 nodejs will start a HTTP server running on 8080 (per default)

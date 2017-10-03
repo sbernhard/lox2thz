@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
 
   // define the model
   var System = sequelize.define('system', {
-	raumisttemp_hk1: { type: DataTypes.FLOAT },
+    raumisttemp_hk1: { type: DataTypes.FLOAT },
     raumsolltemp_hk1: { type: DataTypes.FLOAT },
     raumfeuchte_hk1: { type: DataTypes.FLOAT },
     raumisttemp_hk2: { type: DataTypes.FLOAT },
