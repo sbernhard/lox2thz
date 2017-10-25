@@ -46,6 +46,10 @@ For a complete list of currently available keys, have a look at loxmap.js
 
 ## Loxone Configuration
 ![HTTP Output](/doc/http_ausgang.png)
+![HTTP Output Command](/doc/http_ausgang_befehl.png)
+
+![HTTP Input](/doc/http_eingang.png)
+![HTTP Input Command](/doc/http_eingang_befehl.png)
 
 ## USE AT YOUR OWN RISK
 
