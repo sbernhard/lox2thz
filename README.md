@@ -44,6 +44,9 @@ http://[ip-address]/set/?section=lueftungsstufen&id=stufe_tag&value=2
 
 For a complete list of currently available keys, have a look at loxmap.js
 
+## Loxone Configuration
+![HTTP Output](/doc/http_ausgang.png)
+
 ## USE AT YOUR OWN RISK
 
 # Copyright
