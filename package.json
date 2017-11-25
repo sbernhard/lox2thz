@@ -1,6 +1,6 @@
 {
   "name": "lox2thz",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Interface for ISG Web to read / save values in Tecalor THZ / Stiebel Eltron LWZ. Mainly used in Loxone!",
   "main": "lox2thz.js",
   "scripts": {
