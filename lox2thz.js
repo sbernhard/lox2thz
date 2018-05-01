@@ -242,6 +242,11 @@ app.get('/set', function(request, response) {
       if (validate_value(entry, value)) {
         console.log("Yes "+ value +" is valid for "+ section + "/"+ id);
 
+        // get the real thz value for the selection value (e.g. 1 for 'ablueften'
+        if (entry['type'] == 'selection') {
+          value = entry['selection'][value]; 
+        }
+
         var dataWriter = new httpDataWriter(
             config.get('thz.host'),
             config.get('thz.port'),
