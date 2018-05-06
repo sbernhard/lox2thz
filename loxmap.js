@@ -16,6 +16,14 @@ loxmap = {
     stufe_party: { key: 'val85', type: 'int', min: 0, max: 3 },
     stufe_hand: { key: 'val188', type: 'int', min: 0, max: 3 }
   },
+  luftvolumenstrom: {
+    stufe_1_zuluft: { key: 'val91', type: 'int', min: 10, max: 300 },
+    stufe_2_zuluft: { key: 'val92', type: 'int', min: 80, max: 300 },
+    stufe_3_zuluft: { key: 'val93', type: 'int', min: 80, max: 300 },
+    stufe_1_abluft: { key: 'val94', type: 'int', min: 10, max: 300 },
+    stufe_2_abluft: { key: 'val95', type: 'int', min: 80, max: 300 },
+    stufe_3_abluft: { key: 'val96', type: 'int', min: 80, max: 300 },
+  },
   passivkuehlung: {
     passivkuehlung: {
       key: 'val90', type: 'selection', selection: {
