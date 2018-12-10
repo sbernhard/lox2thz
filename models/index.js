@@ -7,7 +7,8 @@ var sequelize = new Sequelize('sqlite://' + config.get('database.path'));
 // load models
 var models = [
   'Heatpump',
-  'System'
+  'System',
+  'Status'
 ];
 
 models.forEach(function(model) {

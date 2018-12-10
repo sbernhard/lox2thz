@@ -9,6 +9,7 @@ const util = require('util');
 const models = require('./models');
 const hpC = require('./controllers/heatpump_controller.js');
 const systemC = require('./controllers/system_controller.js');
+const statusC = require('./controllers/status_controller.js');
 const httpDataCollector = require('./httpDataCollector.js');
 const httpDataWriter = require('./httpDataWriter.js');
 const loxmap = require('./loxmap.js');
@@ -57,6 +58,15 @@ var collectorSystems = new httpDataCollector(
     config.get('thz.password')
     );
 
+// construct httpDataCollector for status data
+var collectorStatus = new httpDataCollector(
+    config.get('thz.host'),
+    config.get('thz.port'),
+    config.get('modules.status'),
+    config.get('thz.username'),
+    config.get('thz.password')
+    );
+
 // collect the data
 function collect_data(collector, controller, model, cookie) {
   collector.collect(cookie, function(html_data) {
@@ -86,6 +96,7 @@ function auth(resp_callback) {
 setInterval(function() {
   var System = models.System;
   var Heatpump = models.Heatpump;
+  var Status = models.Status;
 
   var request = auth(function(response) {
     var cookie = response.headers['set-cookie'];
@@ -103,6 +114,7 @@ setInterval(function() {
     //console.log("Cookie is "+ cookie);
     collect_data(collectorSystems, systemC, System, cookie);
     collect_data(collectorHeatpumps, hpC, Heatpump, cookie);
+    collect_data(collectorStatus, statusC, Status, cookie);
   });
 }, config.get('dataCollector.interval')*1000);
 
@@ -203,6 +215,30 @@ app.get('/systems', function(request, response) {
   });
 });
 
+// handle the /status request
+app.get('/status', function(request, response) {
+  var key = request.query.key;
+  var Status = models.Status;
+
+  Status.findAll({
+    limit: 1,
+    where: {
+      // your where conditions, or without them if you need ANY entry
+    },
+    order: [['id', 'DESC']]
+  }).then(entries => {
+    var data = "";
+
+    data += generate_output_line(entries[0], "bs_schaltprogramm");
+    data += generate_output_line(entries[0], "bs_filterwechsel");
+    data += generate_output_line(entries[0], "ps_hd_waechter");
+    data += generate_output_line(entries[0], "ps_evu_sperre");
+
+    response.send(data)
+  });
+});
+
+// handle the /status request
 // validate a loxmap entries if value is allowed
 function validate_value(entry, value) {
   var result = false;

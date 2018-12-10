@@ -7,7 +7,8 @@
   },
   "modules": {
     "system": "/?s=1,0",
-    "heatpump": "/?s=1,1"
+    "heatpump": "/?s=1,1",
+    "status": "/?s=2,0"
   },
   "database": {
     "path": "thz_data.sqlite3"
