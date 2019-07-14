@@ -1,6 +1,6 @@
 {
   "name": "lox2thz",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Interface for ISG Web to read / save values in Tecalor THZ / Stiebel Eltron LWZ. Mainly used in Loxone!",
   "main": "lox2thz.js",
   "scripts": {
@@ -22,13 +22,14 @@
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
     "cheerio": "^1.0.0-rc.2",
-    "config": "^3.1.0",
-    "express": "^4.15.3",
+    "config": "^3.2.0",
+    "express": "^4.17.1",
     "http-agent": "^0.1.2",
+    "lodash": ">=4.17.13",
     "node-pre-gyp": "^0.13.0",
-    "sequelize": "^5.7.5",
+    "sequelize": "^5.10.1",
     "sqlite": "^3.0.3",
-    "sqlite3": "^4.0.6",
+    "sqlite3": "^4.0.9",
     "validator": "^10.11.0"
   }
 }
