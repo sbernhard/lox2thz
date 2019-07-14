@@ -9,28 +9,6 @@ loxmap = {
       }
     }
   },
-  lueftungsstufen: {
-    stufe_tag: { key: 'val82', type: 'int', min: 0, max: 3 },
-    stufe_nacht: { key: 'val83', type: 'int', min: 0, max: 3 },
-    stufe_bereitschaft: { key: 'val84', type: 'int', min: 0, max: 3 },
-    stufe_party: { key: 'val85', type: 'int', min: 0, max: 3 },
-    stufe_hand: { key: 'val188', type: 'int', min: 0, max: 3 }
-  },
-  luftvolumenstrom: {
-    stufe_1_zuluft: { key: 'val91', type: 'int', min: 10, max: 300 },
-    stufe_2_zuluft: { key: 'val92', type: 'int', min: 80, max: 300 },
-    stufe_3_zuluft: { key: 'val93', type: 'int', min: 80, max: 300 },
-    stufe_1_abluft: { key: 'val94', type: 'int', min: 10, max: 300 },
-    stufe_2_abluft: { key: 'val95', type: 'int', min: 80, max: 300 },
-    stufe_3_abluft: { key: 'val96', type: 'int', min: 80, max: 300 },
-  },
-  passivkuehlung: {
-    passivkuehlung: {
-      key: 'val90', type: 'selection', selection: {
-        aus: 0, ablueften: 1, zulueften: 2, bypass: 3, sommerkasette: 4
-      }
-    }
-  },
   raumtemp_hk1: {
     raumtemp_tag: { key: 'val5', type: 'double', min: 10, max: 30 },
     raumtemp_nacht: { key: 'val7', type: 'double', min: 10, max: 30 },
@@ -71,6 +49,34 @@ loxmap = {
     ww_soll_nacht: { key: 'val161', type: 'double', min: 10, max: 55 },
     ww_soll_bereitschaft: { key: 'val102', type: 'double', min: 10, max: 55 },
     ww_soll_handbetrieb: { key: 'val101', type: 'double', min: 10, max: 55 }
+  },
+  lueftungsstufen: {
+    stufe_tag: { key: 'val82', type: 'int', min: 0, max: 3 },
+    stufe_nacht: { key: 'val83', type: 'int', min: 0, max: 3 },
+    stufe_bereitschaft: { key: 'val84', type: 'int', min: 0, max: 3 },
+    stufe_party: { key: 'val85', type: 'int', min: 0, max: 3 },
+    stufe_hand: { key: 'val188', type: 'int', min: 0, max: 3 }
+  },
+  luftvolumenstrom: {
+    stufe_1_zuluft: { key: 'val91', type: 'int', min: 10, max: 300 },
+    stufe_2_zuluft: { key: 'val92', type: 'int', min: 80, max: 300 },
+    stufe_3_zuluft: { key: 'val93', type: 'int', min: 80, max: 300 },
+    stufe_1_abluft: { key: 'val94', type: 'int', min: 10, max: 300 },
+    stufe_2_abluft: { key: 'val95', type: 'int', min: 80, max: 300 },
+    stufe_3_abluft: { key: 'val96', type: 'int', min: 80, max: 300 },
+  },
+  passivkuehlung: {
+    passivkuehlung: {
+      key: 'val90', type: 'selection', selection: {
+        aus: 0, ablueften: 1, zulueften: 2, bypass: 3, sommerkasette: 4
+      }
+    }
+  },
+  kuehlbetrieb_hk1: {
+    kuehlbetrieb: { key: 'val73', type: 'int', min: 0, max: 1 }
+  },
+  kuehlbetrieb_hk2: {
+    kuehlbetrieb: { key: 'val74', type: 'int', min: 0, max: 1 }
   }
 }
 
