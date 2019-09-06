@@ -229,11 +229,35 @@ app.get('/status', function(request, response) {
   }).then(entries => {
     var data = "";
 
-    data += generate_output_line(entries[0], "bs_schaltprogramm");
-    data += generate_output_line(entries[0], "bs_filterwechsel");
+    data += generate_output_line(entries[0], "bs_schaltprogramm_aktiv");
+    data += generate_output_line(entries[0], "bs_heizen");
+    data += generate_output_line(entries[0], "bs_kuehlen");
+    data += generate_output_line(entries[0], "bs_warmwasserbereitung");
+    data += generate_output_line(entries[0], "bs_verdichter");
+    data += generate_output_line(entries[0], "bs_abtauen_ll_wt");
+    data += generate_output_line(entries[0], "bs_heizkreispumpe");
+    data += generate_output_line(entries[0], "bs_luefter");
+    data += generate_output_line(entries[0], "bs_hd_waechter");
+    data += generate_output_line(entries[0], "bs_evu_sperre");
+    data += generate_output_line(entries[0], "bs_service");
+    data += generate_output_line(entries[0], "bs_filterwechsel_beide");
+    data += generate_output_line(entries[0], "bs_filterwechsel_abluft");
+    data += generate_output_line(entries[0], "bs_filterwechsel_zuluft");
+
+    data += generate_output_line(entries[0], "ps_schaltprogramm_aktiv");
+    data += generate_output_line(entries[0], "ps_heizen");
+    data += generate_output_line(entries[0], "ps_kuehlen");
+    data += generate_output_line(entries[0], "ps_warmwasserbereitung");
+    data += generate_output_line(entries[0], "ps_verdichter");
+    data += generate_output_line(entries[0], "ps_abtauen_ll_wt");
+    data += generate_output_line(entries[0], "ps_heizkreispumpe");
+    data += generate_output_line(entries[0], "ps_luefter");
     data += generate_output_line(entries[0], "ps_hd_waechter");
     data += generate_output_line(entries[0], "ps_evu_sperre");
-
+    data += generate_output_line(entries[0], "ps_service");
+    data += generate_output_line(entries[0], "ps_filterwechsel_beide");
+    data += generate_output_line(entries[0], "ps_filterwechsel_abluft");
+    data += generate_output_line(entries[0], "bs_filterwechsel_zuluft");
     response.send(data)
   });
 });

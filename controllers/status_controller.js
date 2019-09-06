@@ -12,28 +12,45 @@ module.exports = {
 
   parse_html_and_save: function(html_data, Status) {
 
+    var st_table = new Array();
+    st_table["SCHALTPROGRAMM AKTIV"] = "schaltprogramm_aktiv";
+    st_table["HEIZEN"] = "heizen";
+    st_table["KÜHLEN"] = "kuehlen";
+    st_table["WARMWASSERBEREITUNG"] = "warmwasserbereitung";
+    st_table["VERDICHTER"] = "verdichter";
+    st_table["ABTAUEN-LL-WT"] = "abtauen_ll_wt";
+    st_table["HEIZKREISPUMPE"] = "heizkreispumpe";
+    st_table["LÜFTER"] = "luefter"
+    st_table["HD-WÄCHTER"] = "hd_waechter";
+    st_table["EVU-SPERRE"] = "evu_sperre";
+    st_table["SERVICE"] = "service";
+    st_table["FILTERWECHSEL \\(BEIDE\\)"] = "filterwechsel_beide";
+    st_table["FILTERWECHSEL \\(ABLUFT\\)"] = "filterwechsel_abluft";
+    st_table["FILTERWECHSEL \\(ZULUFT\\)"] = "filterwechsel_zuluft";
+
     // get a new data set
     var s_entry = new Status();
 
     // parse it with cheerio
     var $ = cheerio.load(html_data);
 
-    $('td[class~="key"]').each(function(i, elem) {
-      var key = $(this).text();
-      // the value isn't interesting
+    $('th[class~="round-top"]').each(function(i, elem) { 
+      var st_type = null;
+      if ($(elem).text() == "BETRIEBSSTATUS") {
+        st_type = "bs_";
+      } else {
+        st_type = "ps_";
+      }
+      $(elem).closest('table').find('td[class~="key"]').each(function(j, jelem) {
+        var key = $(jelem).text();
 
-      if (key.match(/SCHALTPROGRAMM/)) {
-         s_entry.bs_schaltprogramm = key;
-      }
-      else if (key.match(/FILTERWECHSEL/)) {
-         s_entry.bs_filterwechsel = key;
-      }
-      else if (key.match(/HD-WÄCHTER/)) {
-         s_entry.ps_hd_waechter = key;
-      }
-      else if (key.match(/EVU-SPERRE/)) {
-         s_entry.ps_evu_sperre = key;
-      }
+        for (var st in st_table) {
+          var r = new RegExp(st);
+          if (key.match(r)) {
+           s_entry[st_type + st_table[st]] = 1;
+          }
+        }
+      })
     });
     s_entry.save();
   }
