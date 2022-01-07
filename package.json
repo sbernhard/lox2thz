@@ -30,6 +30,6 @@
     "sequelize": "^5.10.1",
     "sqlite": "^3.0.3",
     "sqlite3": "^4.0.9",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   }
 }
