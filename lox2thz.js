@@ -148,6 +148,7 @@ app.get('/heatpumps', function(request, response) {
     data += generate_output_line(entries[0], "verfluessigertemp");
     data += generate_output_line(entries[0], "fortluft_ist");
     data += generate_output_line(entries[0], "fortluft_soll");
+    data += generate_output_line(entries[0], "verdichterstarts");
     data += generate_output_line(entries[0], "wm_heizen_tag");
     data += generate_output_line(entries[0], "wm_heizen_summe");
     data += generate_output_line(entries[0], "wm_ww_tag");
@@ -160,6 +161,7 @@ app.get('/heatpumps', function(request, response) {
     data += generate_output_line(entries[0], "wm_solar_hz_sume");
     data += generate_output_line(entries[0], "wm_solar_ww_tag");
     data += generate_output_line(entries[0], "wm_solar_ww_summe");
+    data += generate_output_line(entries[0], "wm_kuehlen_summe");
     data += generate_output_line(entries[0], "p_heizung_tag");
     data += generate_output_line(entries[0], "p_heizung_summe");
     data += generate_output_line(entries[0], "p_ww_tag");
@@ -167,6 +169,7 @@ app.get('/heatpumps', function(request, response) {
     data += generate_output_line(entries[0], "verdichter_kuehlen");
     data += generate_output_line(entries[0], "verdichter_ww");
     data += generate_output_line(entries[0], "elektr_ne_heizen");
+    data += generate_output_line(entries[0], "elektr_ne_ww");
 
     response.send(data)
   });
