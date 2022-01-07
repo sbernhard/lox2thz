@@ -47,6 +47,9 @@ module.exports = {
         case 'FORTLUFT SOLL VOLUMENSTROM':
           hp_entry.fortluft_soll = floatValue;
           break;
+        case 'VERDICHTERSTARTS':
+          hp_entry.verdichterstarts = floatValue;
+          break;
         case 'WM HEIZEN TAG':
           hp_entry.wm_heizen_tag = floatValue;
           break;
@@ -83,6 +86,9 @@ module.exports = {
         case 'WM SOLAR WW SUMME':
           hp_entry.wm_solar_ww_summe = floatValue;
           break;
+        case 'WM KÜHLEN SUMME':
+          hp_entry.wm_kuehlen_summe = floatValue;
+          break;
         case 'P HEIZUNG TAG':
           hp_entry.p_heizung_tag = floatValue;
           break;
@@ -103,6 +109,9 @@ module.exports = {
           break;
         case 'ELEKTR. NE HEIZEN':
           hp_entry.elektr_ne_heizen = floatValue;
+          break;
+        case 'ELEKTR. NE WW':
+          hp_entry.elektr_ne_ww = floatValue;
           break;
         default:
           break;

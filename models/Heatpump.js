@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     verfluessigertemp: { type: DataTypes.FLOAT },
     fortluft_ist: { type: DataTypes.FLOAT },
     fortluft_soll: { type: DataTypes.FLOAT },
+    verdichterstarts: { type: DataTypes.FLOAT },
     wm_heizen_tag: { type: DataTypes.FLOAT },
     wm_heizen_summe: { type: DataTypes.FLOAT },
     wm_ww_tag: { type: DataTypes.FLOAT },
@@ -22,14 +23,15 @@ module.exports = function(sequelize, DataTypes) {
     wm_solar_hz_tag: { type: DataTypes.FLOAT },
     wm_solar_hz_sume: { type: DataTypes.FLOAT },
     wm_solar_ww_tag: { type: DataTypes.FLOAT },
-    wm_solar_ww_summe: { type: DataTypes.FLOAT },
+    wm_kuehlen_summe: { type: DataTypes.FLOAT },
     p_heizung_tag: { type: DataTypes.FLOAT },
     p_heizung_summe: { type: DataTypes.FLOAT },
     p_ww_tag: { type: DataTypes.FLOAT },
     verdichter_heizen: { type: DataTypes.FLOAT },
     verdichter_kuehlen: { type: DataTypes.FLOAT },
     verdichter_ww: { type: DataTypes.FLOAT },
-    elektr_ne_heizen: { type: DataTypes.FLOAT }
+    elektr_ne_heizen: { type: DataTypes.FLOAT },
+    elektr_ne_ww: { type: DataTypes.FLOAT }
   });
 
   // create the datebase table
