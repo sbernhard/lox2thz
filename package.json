@@ -27,7 +27,7 @@
     "http-agent": "^0.1.2",
     "lodash": ">=4.17.13",
     "node-pre-gyp": "^0.13.0",
-    "sequelize": "^5.10.1",
+    "sequelize": "^6.28.2",
     "sqlite": "^3.0.3",
     "sqlite3": "^4.0.9",
     "validator": "^13.7.0"
