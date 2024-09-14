@@ -26,7 +26,7 @@ module.exports = {
       //console.log(key + " => " + floatValue);
 
       switch (key) {
-        case 'HEISSGASTEMPERATUR':
+        case 'HEISSGASTEMP.':
           hp_entry.heissgastemp = floatValue;
           break;
         case 'HOCHDRUCK':

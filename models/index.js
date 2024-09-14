@@ -1,5 +1,6 @@
 var Sequelize = require('sequelize');
 var config = require('config');
+var path = require('path');
 
 // initialize database connection
 var sequelize = new Sequelize('sqlite://' + config.get('database.path'));
@@ -12,7 +13,8 @@ var models = [
 ];
 
 models.forEach(function(model) {
-  module.exports[model] = sequelize.import(__dirname + '/' + model);
+  let modelPath = path.join(__dirname, model);
+  module.exports[model] = require(modelPath)(sequelize, Sequelize.DataTypes);
 });
 
 // export connection

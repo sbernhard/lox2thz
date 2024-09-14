@@ -59,10 +59,10 @@ module.exports = {
         case 'SOLLWERT HK2':
           system_entry.sollwert_hk2 = floatValue;
           break;
-        case 'VORLAUFTEMPERATUR':
+        case 'VORLAUFTEMP.':
           system_entry.vorlauftemp = floatValue;
           break;
-        case 'RÜCKLAUFTEMPERATUR':
+        case 'RÜCKLAUFTEMP.':
           system_entry.ruecklauftemp = floatValue;
           break;
         case 'DRUCK HEIZKREIS':
