@@ -29,6 +29,7 @@ nodejs will start a HTTP server running on 8080 (per default)
 For receiving data, start a browser and access
  - http://[ip-address]/heatpumps
  - http://[ip-address]/systems
+ - http://[ip-address]/status
 
 ## Loxone connection
 The result data is like the following which can be easily parsed by Loxone
@@ -50,6 +51,11 @@ For a complete list of currently available keys, have a look at loxmap.js
 
 ![HTTP Input](/doc/http_eingang.png)
 ![HTTP Input Command](/doc/http_eingang_befehl.png)
+
+## Cleanup script
+
+The cleanup.sh script can be used to cleanup old values from database.
+Maybe add it as a cronjob.
 
 ## USE AT YOUR OWN RISK
 
