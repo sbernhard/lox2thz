@@ -1,0 +1,23 @@
+[Unit]
+Description=lox2thz service
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=pi
+WorkingDirectory=/home/pi/lox2thz/
+ExecStart=nodejs lox2thz.js
+
+# Restart options
+Restart=always
+RestartSec=10
+
+# Output logs
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=lox2thz
+
+[Install]
+WantedBy=multi-user.target
