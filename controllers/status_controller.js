@@ -27,6 +27,7 @@ module.exports = {
     st_table["FILTERWECHSEL \\(BEIDE\\)"] = "filterwechsel_beide";
     st_table["FILTERWECHSEL \\(ABLUFT\\)"] = "filterwechsel_abluft";
     st_table["FILTERWECHSEL \\(ZULUFT\\)"] = "filterwechsel_zuluft";
+    st_table["FILTERWECHSEL"] = "filterwechsel_beide";
 
     // get a new data set
     var s_entry = new Status();
@@ -45,9 +46,11 @@ module.exports = {
         var key = $(jelem).text();
 
         for (var st in st_table) {
-          var r = new RegExp(st);
+          var r = new RegExp(st, "i");
           if (key.match(r)) {
-           s_entry[st_type + st_table[st]] = 1;
+            s_entry[st_type + st_table[st]] = 1;
+           // We found a match, lets break.
+           break;
           }
         }
       })
