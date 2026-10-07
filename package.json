@@ -23,7 +23,7 @@
     "basic-auth-connect": "^1.0.0",
     "cheerio": "^1.0.0",
     "config": "^3.3.12",
-    "express": "^4.21.0",
+    "express": "^5.2.1",
     "http-agent": "^0.1.2",
     "lodash": ">=4.17.21",
     "sequelize": "^6.37.3",
